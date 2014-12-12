@@ -214,6 +214,10 @@ namespace RBTree
                         return (a.ID == s.ID && a.Name == s.Name);
                     }); 
 
+                    if (find == null)
+                    {
+                        return false;
+                    }
                     if (find != null)
                     {
                         node.StudentList.Remove(find);
