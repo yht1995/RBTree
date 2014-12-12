@@ -97,6 +97,7 @@
             this.buttonRand.TabIndex = 3;
             this.buttonRand.Text = "随机生成";
             this.buttonRand.UseVisualStyleBackColor = true;
+            this.buttonRand.Click += new System.EventHandler(this.buttonRand_Click);
             // 
             // buttonDel
             // 

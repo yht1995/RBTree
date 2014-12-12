@@ -15,6 +15,8 @@ namespace RBTree
     {
         private RBTree rbTree;
         private Graphics graphics;
+        Random random = new Random();
+
         public RBTreeView()
         {
             InitializeComponent();
@@ -105,6 +107,20 @@ namespace RBTree
             SolidBrush b1 = new SolidBrush(Color.Black);
             graphics.FillEllipse(b1, p.X + 10, p.Y + 10, 20, 20);
             b1.Dispose();
+        }
+
+        private void buttonRand_Click(object sender, EventArgs e)
+        {
+            string[] nameA = new string[] { "蚌", "赵", "李", "孟", "雷", "劳" ,"王"};
+            string[] nameB = new string[] { "绍", "夕", "宛", "岳", "磊", "维" ,"勇"};
+            string[] nameC = new string[] { "诗", "炜", "洲", "", "", "旻" ,""};
+
+            textBoxName.Text = nameA[random.Next(0, nameA.Count() - 1)]
+                + nameB[random.Next(0, nameB.Count() - 1)]
+                + nameC[random.Next(0, nameC.Count() - 1)];
+
+            textBoxID.Text = random.Next(20149999).ToString();
+            textBoxScore.Text = random.Next(100).ToString();
         }
     }
 }
