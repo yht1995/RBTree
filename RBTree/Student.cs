@@ -23,45 +23,45 @@ namespace RBTree
     public class Student
     {
         private Rate rate;
-        private int socre;
+        private int score;
         private string id;
         private string name;
 
-        public Student(int socre, string id, string name)
+        public Student(int score, string id, string name)
         {
-            if (socre >= 95 && socre <= 100)
+            if (score >= 95 && score <= 100)
             {
                 rate = Rate.AAplus;
             }
-            else if (socre >= 90)
+            else if (score >= 90)
             {
                 rate = Rate.AA;
             }
-            else if (socre >= 85)
+            else if (score >= 85)
             {
                 rate = Rate.A;
             }
-            else if (socre >= 80)
+            else if (score >= 80)
             {
                 rate = Rate.Bplus;
             }
-            else if (socre >= 75)
+            else if (score >= 75)
             {
                 rate = Rate.B;
             }
-            else if (socre >= 70)
+            else if (score >= 70)
             {
                 rate = Rate.Bminus;
             }
-            else if (socre >= 65)
+            else if (score >= 65)
             {
                 rate = Rate.Cplus;
             }
-            else if (socre >= 60)
+            else if (score >= 60)
             {
                 rate = Rate.C;
             }
-            else if (socre >= 50)
+            else if (score >= 50)
             {
                 rate = Rate.D;
             }
@@ -70,7 +70,7 @@ namespace RBTree
                 rate = Rate.E;
             }
 
-            this.socre = socre;
+            this.socre = score;
             this.id = id;
             this.name = name;
         }
