@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Text;
 
 namespace RBTree
 {
@@ -30,15 +26,11 @@ namespace RBTree
             try
             {
                 Student s = new Student(Convert.ToInt32(textBoxScore.Text), textBoxID.Text, textBoxName.Text);
-                graphics.Clear(Color.WhiteSmoke);
                 if (!rbTree.Add(s))
                 {
                     MessageBox.Show("插入失败");
                 }
-                if (rbTree.Head != null)
-                {
-                    DrawRBTree(rbTree.Head, new Point(350, 20), 150);
-                }
+                DoubleBufDraw();
             }
             catch (System.Exception)
             {
@@ -51,15 +43,11 @@ namespace RBTree
             try
             {
                 Student s = new Student(Convert.ToInt32(textBoxScore.Text), textBoxID.Text, textBoxName.Text);
-                graphics.Clear(Color.WhiteSmoke);
                 if (!rbTree.Remove(s))
                 {
                     MessageBox.Show("删除失败");
                 }
-                if (rbTree.Head != null)
-                {
-                    DrawRBTree(rbTree.Head, new Point(350, 20), 150);
-                }
+                DoubleBufDraw();
             }
             catch (System.Exception)
             {
@@ -67,22 +55,37 @@ namespace RBTree
             }
         }
 
-        private void DrawRBTree(Node node,Point p,int x)
+        private void DoubleBufDraw()
+        {
+            BufferedGraphicsContext currentContext = BufferedGraphicsManager.Current;
+            BufferedGraphics myBuffer = currentContext.Allocate(graphics,new Rectangle(0,0,800,600));
+            Graphics g = myBuffer.Graphics;
+            g.Clear(Color.WhiteSmoke);
+            if (rbTree.Head != null)
+            {
+                DrawRBTree(g,rbTree.Head, new Point(350, 20), 150);
+            }
+            myBuffer.Render(graphics);
+            myBuffer.Dispose();
+            g.Dispose();  
+        }
+
+        private void DrawRBTree(Graphics graphics,Node node,Point p,int x)
         {
             if (node == null)
             {
-                DrawNullNode(p);
+                DrawNullNode(graphics,p);
                 return;
             }
             Pen pen = new Pen(Color.Black,2);
             graphics.DrawLine(pen, new Point(p.X + 20, p.Y + 20), new Point(p.X - x + 20, p.Y + 80));
             graphics.DrawLine(pen, new Point(p.X + 20, p.Y + 20), new Point(p.X + x + 20, p.Y + 80));
-            DrawNode(node,p);
-            DrawRBTree(node.Left, new Point(p.X - x, p.Y + 60), x / 2);
-            DrawRBTree(node.Right, new Point(p.X + x, p.Y + 60), x / 2);
+            DrawNode(graphics,node, p);
+            DrawRBTree(graphics,node.Left, new Point(p.X - x, p.Y + 60), x / 2);
+            DrawRBTree(graphics,node.Right, new Point(p.X + x, p.Y + 60), x / 2);
         }
 
-        private void DrawNode(Node n,Point p)
+        private void DrawNode(Graphics graphics, Node n, Point p)
         {
             SolidBrush b1;
             if (n.IsRed)
@@ -95,14 +98,14 @@ namespace RBTree
             }
             graphics.FillEllipse(b1, p.X, p.Y, 40, 40);
             SolidBrush b2 = new SolidBrush(Color.White);
-            graphics.DrawString(n.RateString(), new Font("Arial", 10), b2, p.X + 12, p.Y + 10);
-            graphics.DrawString(n.StudentList.Count.ToString(), new Font("Arial", 10), b2, p.X + 12, p.Y + 20);
+            graphics.DrawString(n.RateString(), new Font("Arial", 10), b2, p.X + 12, p.Y + 8);
+            graphics.DrawString(n.StudentList.Count.ToString(), new Font("Arial", 10), b2, p.X + 12, p.Y + 22);
 
             b1.Dispose();
             b2.Dispose();
         }
 
-        private void DrawNullNode(Point p)
+        private void DrawNullNode(Graphics graphics, Point p)
         {
             SolidBrush b1 = new SolidBrush(Color.Black);
             graphics.FillEllipse(b1, p.X + 10, p.Y + 10, 20, 20);
@@ -121,6 +124,35 @@ namespace RBTree
 
             textBoxID.Text = random.Next(20149999).ToString();
             textBoxScore.Text = random.Next(100).ToString();
+        }
+
+        private void buttonImport_Click(object sender, EventArgs e)
+        {
+            this.openFileDialog.Filter = "文本文件(*.txt)|*.txt";
+            if (this.openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string FileName = this.openFileDialog.FileName;
+                StreamReader sr = new StreamReader(FileName,Encoding.Default);
+                while (!sr.EndOfStream)
+                {
+                    string strContent = sr.ReadLine();
+                    string[] str = new string[3];
+                    str = strContent.Split(' ');
+                    Student s = new Student(Convert.ToInt32(str[2]), str[1], str[0]);
+                    rbTree.Add(s);
+                }
+                DoubleBufDraw();
+            }
+        }
+
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+            this.saveFileDialog.Filter = "文本文件(*.txt)|*.txt";
+            if (this.openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string FileName = this.saveFileDialog.FileName;
+                StreamReader sr = new StreamReader(FileName, Encoding.Default);
+            }
         }
     }
 }

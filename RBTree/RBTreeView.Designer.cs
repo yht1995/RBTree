@@ -54,8 +54,10 @@
             this.textBoxNameS = new System.Windows.Forms.TextBox();
             this.textBoxIDS = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonExport = new System.Windows.Forms.Button();
+            this.buttonImport = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -307,8 +309,8 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.button2);
-            this.groupBox5.Controls.Add(this.button1);
+            this.groupBox5.Controls.Add(this.buttonExport);
+            this.groupBox5.Controls.Add(this.buttonImport);
             this.groupBox5.Location = new System.Drawing.Point(13, 442);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(77, 135);
@@ -316,23 +318,29 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "文件操作";
             // 
-            // button2
+            // buttonExport
             // 
-            this.button2.Location = new System.Drawing.Point(7, 59);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(61, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "导出";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonExport.Location = new System.Drawing.Point(7, 59);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(61, 23);
+            this.buttonExport.TabIndex = 0;
+            this.buttonExport.Text = "导出";
+            this.buttonExport.UseVisualStyleBackColor = true;
+            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
             // 
-            // button1
+            // buttonImport
             // 
-            this.button1.Location = new System.Drawing.Point(7, 30);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(61, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "导入";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonImport.Location = new System.Drawing.Point(7, 30);
+            this.buttonImport.Name = "buttonImport";
+            this.buttonImport.Size = new System.Drawing.Size(61, 23);
+            this.buttonImport.TabIndex = 0;
+            this.buttonImport.Text = "导入";
+            this.buttonImport.UseVisualStyleBackColor = true;
+            this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
             // 
             // RBTreeView
             // 
@@ -384,8 +392,10 @@
         private System.Windows.Forms.ComboBox comboBoxRateS;
         private System.Windows.Forms.TextBox textBoxIDS;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonExport;
+        private System.Windows.Forms.Button buttonImport;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 
