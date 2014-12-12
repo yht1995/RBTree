@@ -137,6 +137,7 @@ namespace RBTree
                     Student s = new Student(Convert.ToInt32(str[2]), str[1], str[0]);
                     rbTree.Add(s);
                 }
+                sr.Close();
                 DoubleBufDraw();
             }
         }
@@ -144,11 +145,31 @@ namespace RBTree
         private void buttonExport_Click(object sender, EventArgs e)
         {
             this.saveFileDialog.Filter = "文本文件(*.txt)|*.txt";
-            if (this.openFileDialog.ShowDialog() == DialogResult.OK)
+            if (this.saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string FileName = this.saveFileDialog.FileName;
-                StreamReader sr = new StreamReader(FileName, Encoding.Default);
+                StreamWriter sr = new StreamWriter(FileName, false, Encoding.Default);
+                if (rbTree.Head != null)
+                {
+                    InorderWrite(rbTree.Head, sr);
+                }
+                sr.Flush();
+                sr.Close();
             }
+        }
+
+        private void InorderWrite(Node node, StreamWriter s)
+        {
+            if (node == null)
+            {
+                return;
+            }
+            InorderWrite(node.Left,s);
+            foreach (Student stu in node.StudentList)
+            {
+                s.WriteLine(stu.Name + " " + stu.ID + " " + stu.Socre.ToString());
+            }
+            InorderWrite(node.Right,s);
         }
 
         private void buttonInorderTraversal_Click(object sender, EventArgs e)
@@ -208,7 +229,6 @@ namespace RBTree
                 }
             }
         }
-
 
     }
 }
