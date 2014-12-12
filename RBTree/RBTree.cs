@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RBTree
 {
@@ -98,8 +99,20 @@ namespace RBTree
                 //如果插入值已存在，则插入失败
                 if (current.Key == s.Rate)
                 {
-                    current.AddStudent(s);
-                    return true;
+                    Student find = current.StudentList.Find(delegate(Student a)
+                    {
+                        return (a.ID == s.ID && a.Name == s.Name);
+                    }); 
+                    if (find == null)
+                    {
+                        current.AddStudent(s);
+                        return true;
+                    }
+                    else
+                    {
+                        Exception ex = new Exception("该学生已存在！");
+                        throw(ex);
+                    }
                 }
                 parent = current;
                 //当插入值小于当前结点，则继续访问左子树，否则访问右子树
@@ -213,10 +226,9 @@ namespace RBTree
                     {
                         return (a.ID == s.ID && a.Name == s.Name);
                     }); 
-
                     if (find == null)
                     {
-                        return false;
+                        throw(new Exception("没有该学生"));
                     }
                     if (find != null)
                     {
@@ -237,7 +249,7 @@ namespace RBTree
                     node = node.Right;
                 }
             }
-            return false; //返回false表示删除失败
+            throw (new Exception("没有该分数段"));
         }
         //删除指定结点
         private void RemoveNode(Node node)

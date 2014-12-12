@@ -40,8 +40,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.buttonTraversalB = new System.Windows.Forms.Button();
-            this.buttonTraversalA = new System.Windows.Forms.Button();
+            this.buttonLevelTraversal = new System.Windows.Forms.Button();
+            this.buttonInorderTraversal = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.textBoxScoreH = new System.Windows.Forms.TextBox();
@@ -66,12 +66,13 @@
             // 
             // groupBoxRBTree
             // 
+            this.groupBoxRBTree.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.groupBoxRBTree.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.groupBoxRBTree.Location = new System.Drawing.Point(12, 12);
             this.groupBoxRBTree.Name = "groupBoxRBTree";
             this.groupBoxRBTree.Size = new System.Drawing.Size(767, 423);
             this.groupBoxRBTree.TabIndex = 0;
             this.groupBoxRBTree.TabStop = false;
-            this.groupBoxRBTree.Text = "红黑树";
             // 
             // groupBox2
             // 
@@ -171,8 +172,8 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.buttonTraversalB);
-            this.groupBox3.Controls.Add(this.buttonTraversalA);
+            this.groupBox3.Controls.Add(this.buttonLevelTraversal);
+            this.groupBox3.Controls.Add(this.buttonInorderTraversal);
             this.groupBox3.Location = new System.Drawing.Point(369, 442);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(105, 137);
@@ -180,23 +181,25 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "遍历";
             // 
-            // buttonTraversalB
+            // buttonLevelTraversal
             // 
-            this.buttonTraversalB.Location = new System.Drawing.Point(15, 66);
-            this.buttonTraversalB.Name = "buttonTraversalB";
-            this.buttonTraversalB.Size = new System.Drawing.Size(75, 23);
-            this.buttonTraversalB.TabIndex = 1;
-            this.buttonTraversalB.Text = "层次遍历";
-            this.buttonTraversalB.UseVisualStyleBackColor = true;
+            this.buttonLevelTraversal.Location = new System.Drawing.Point(15, 66);
+            this.buttonLevelTraversal.Name = "buttonLevelTraversal";
+            this.buttonLevelTraversal.Size = new System.Drawing.Size(75, 23);
+            this.buttonLevelTraversal.TabIndex = 1;
+            this.buttonLevelTraversal.Text = "层次遍历";
+            this.buttonLevelTraversal.UseVisualStyleBackColor = true;
+            this.buttonLevelTraversal.Click += new System.EventHandler(this.buttonLevelTraversal_Click);
             // 
-            // buttonTraversalA
+            // buttonInorderTraversal
             // 
-            this.buttonTraversalA.Location = new System.Drawing.Point(15, 20);
-            this.buttonTraversalA.Name = "buttonTraversalA";
-            this.buttonTraversalA.Size = new System.Drawing.Size(75, 23);
-            this.buttonTraversalA.TabIndex = 0;
-            this.buttonTraversalA.Text = "中序遍历";
-            this.buttonTraversalA.UseVisualStyleBackColor = true;
+            this.buttonInorderTraversal.Location = new System.Drawing.Point(15, 20);
+            this.buttonInorderTraversal.Name = "buttonInorderTraversal";
+            this.buttonInorderTraversal.Size = new System.Drawing.Size(75, 23);
+            this.buttonInorderTraversal.TabIndex = 0;
+            this.buttonInorderTraversal.Text = "中序遍历";
+            this.buttonInorderTraversal.UseVisualStyleBackColor = true;
+            this.buttonInorderTraversal.Click += new System.EventHandler(this.buttonInorderTraversal_Click);
             // 
             // groupBox4
             // 
@@ -378,8 +381,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button buttonTraversalB;
-        private System.Windows.Forms.Button buttonTraversalA;
+        private System.Windows.Forms.Button buttonLevelTraversal;
+        private System.Windows.Forms.Button buttonInorderTraversal;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton radioButtonScore;
         private System.Windows.Forms.RadioButton radioButtonRate;

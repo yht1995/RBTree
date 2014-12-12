@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 
 namespace RBTree
 {
@@ -26,15 +27,12 @@ namespace RBTree
             try
             {
                 Student s = new Student(Convert.ToInt32(textBoxScore.Text), textBoxID.Text, textBoxName.Text);
-                if (!rbTree.Add(s))
-                {
-                    MessageBox.Show("插入失败");
-                }
+                rbTree.Add(s);
                 DoubleBufDraw();
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                MessageBox.Show("输入不合法");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -43,15 +41,12 @@ namespace RBTree
             try
             {
                 Student s = new Student(Convert.ToInt32(textBoxScore.Text), textBoxID.Text, textBoxName.Text);
-                if (!rbTree.Remove(s))
-                {
-                    MessageBox.Show("删除失败");
-                }
+                rbTree.Remove(s);
                 DoubleBufDraw();
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                MessageBox.Show("输入不合法");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -131,6 +126,7 @@ namespace RBTree
             this.openFileDialog.Filter = "文本文件(*.txt)|*.txt";
             if (this.openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                rbTree = new RBTree();
                 string FileName = this.openFileDialog.FileName;
                 StreamReader sr = new StreamReader(FileName,Encoding.Default);
                 while (!sr.EndOfStream)
@@ -154,5 +150,65 @@ namespace RBTree
                 StreamReader sr = new StreamReader(FileName, Encoding.Default);
             }
         }
+
+        private void buttonInorderTraversal_Click(object sender, EventArgs e)
+        {
+            StudentListView list = new StudentListView();
+            list.Text = "中序遍历";
+            if (rbTree.Head != null)
+            {
+                InorderTraversal(rbTree.Head,list);
+            }
+            list.ShowDialog();
+        }
+        
+        private void InorderTraversal(Node node, StudentListView s)
+        {
+            if (node == null)
+            {
+                return;
+            }
+            InorderTraversal(node.Left, s);
+            foreach (Student stu in node.StudentList)
+            {
+                s.AddStudent(stu);
+            }
+            InorderTraversal(node.Right, s);
+        }
+
+        private void buttonLevelTraversal_Click(object sender, EventArgs e)
+        {
+            StudentListView list = new StudentListView();
+            list.Text = "层次遍历";
+            if (rbTree.Head != null)
+            {
+                LevelTraversal(rbTree.Head, list);
+            }
+            list.ShowDialog();
+        }
+
+        private void LevelTraversal(Node node, StudentListView s)
+        {
+            Queue<Node> qNode = new Queue<Node>();
+            qNode.Enqueue(node);
+            while (qNode.Count != 0)
+            {
+                Node top = qNode.Dequeue();
+                if (top.Left != null)
+                {
+                    qNode.Enqueue(top.Left);
+                }
+                if (top.Right != null)
+                {
+                    qNode.Enqueue(top.Right);
+                }
+                foreach (Student stu in top.StudentList)
+                {
+                    s.AddStudent(stu);
+                }
+            }
+        }
+
+
     }
 }
