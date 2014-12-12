@@ -80,6 +80,7 @@ namespace RBTree
 
         private Node[] path = new Node[32]; //记录访问路径上的结点
         private int p; //表示当前访问到的结点在_path上的索引
+
         public bool Add(Student s) //添加一个元素
         {  //如果是空树，则新结点成为二叉排序树的根
             if (_head == null)
@@ -197,7 +198,7 @@ namespace RBTree
             return ((node != null) && node.IsRed);
         }
         //删除指定值
-        public bool Remove(TypeRate value)
+        public bool Remove(Student s)
         {
             p = -1;
             //parent表示双亲结点，node表示当前结点
@@ -206,13 +207,24 @@ namespace RBTree
             while (node != null)
             {
                 path[++p] = node;
-                //如果找到，则调用RemoveNode方法删除结点
-                if (value == node.Key)
+                if (s.Rate == node.Key)
                 {
-                    RemoveNode(node);//现在p指向被删除结点
+                    Student find = node.StudentList.Find(delegate(Student a)
+                    {
+                        return (a.ID == s.ID && a.Name == s.Name);
+                    }); 
+
+                    if (find != null)
+                    {
+                        node.StudentList.Remove(find);
+                    }
+                    if (node.StudentList.Count == 0)
+                    {
+                        RemoveNode(node);//现在p指向被删除结点
+                    }
                     return true; //返回true表示删除成功
                 }
-                if (value < node.Key)
+                if (s.Rate < node.Key)
                 {   //如果删除值小于当前结点，则向左子树继续寻找
                     node = node.Left;
                 }

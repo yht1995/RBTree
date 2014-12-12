@@ -30,6 +30,11 @@ namespace RBTree
 
         public Student(int score, string id, string name)
         {
+            if (score<0 || score >100)
+            {
+                Exception ex = new Exception("分数不合法");
+                throw(ex);
+            }
             if (score >= 95 && score <= 100)
             {
                 rate = TypeRate.AAplus;
