@@ -4,7 +4,7 @@ namespace RBTree
 {
     public class Node
     {
-        private Rate rate; //数据
+        private TypeRate rate; //数据
         private Node left; //左孩子
         private Node right; //右孩子
         private bool color; //色
@@ -24,7 +24,7 @@ namespace RBTree
         }
 
         //属性
-        public Rate Key //数据
+        public TypeRate Key //数据
         {
             get { return rate; }
             set { rate = value; }
@@ -49,11 +49,35 @@ namespace RBTree
             get { return studentList; }
             set { studentList = value; }
         }
+
+        public string RateString()
+        {
+            switch (this.rate)
+            {
+                case (TypeRate.AAplus):
+                    return ("AA+");
+                case (TypeRate.Bplus):
+                    return ("B+");
+                case (TypeRate.Bminus):
+                    return ("B-");
+                case (TypeRate.Cplus):
+                    return ("C+");
+                default:
+                    return (this.rate.ToString());
+            }
+        }
     }
 
     public class RBTree
     {    //成员变量
         private Node _head; //头指针
+
+        public Node Head
+        {
+            get { return _head; }
+            set { _head = value; }
+        }
+
         private Node[] path = new Node[32]; //记录访问路径上的结点
         private int p; //表示当前访问到的结点在_path上的索引
         public bool Add(Student s) //添加一个元素
@@ -173,7 +197,7 @@ namespace RBTree
             return ((node != null) && node.IsRed);
         }
         //删除指定值
-        public bool Remove(Rate value)
+        public bool Remove(TypeRate value)
         {
             p = -1;
             //parent表示双亲结点，node表示当前结点

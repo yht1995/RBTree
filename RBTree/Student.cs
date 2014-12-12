@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RBTree
 {
-    public enum Rate
+    public enum TypeRate
     {
         AAplus = 9,
         AA = 8,
@@ -20,9 +20,10 @@ namespace RBTree
         E = 0
     }
 
+
     public class Student
     {
-        private Rate rate;
+        private TypeRate rate;
         private int score;
         private string id;
         private string name;
@@ -31,59 +32,59 @@ namespace RBTree
         {
             if (score >= 95 && score <= 100)
             {
-                rate = Rate.AAplus;
+                rate = TypeRate.AAplus;
             }
             else if (score >= 90)
             {
-                rate = Rate.AA;
+                rate = TypeRate.AA;
             }
             else if (score >= 85)
             {
-                rate = Rate.A;
+                rate = TypeRate.A;
             }
             else if (score >= 80)
             {
-                rate = Rate.Bplus;
+                rate = TypeRate.Bplus;
             }
             else if (score >= 75)
             {
-                rate = Rate.B;
+                rate = TypeRate.B;
             }
             else if (score >= 70)
             {
-                rate = Rate.Bminus;
+                rate = TypeRate.Bminus;
             }
             else if (score >= 65)
             {
-                rate = Rate.Cplus;
+                rate = TypeRate.Cplus;
             }
             else if (score >= 60)
             {
-                rate = Rate.C;
+                rate = TypeRate.C;
             }
             else if (score >= 50)
             {
-                rate = Rate.D;
+                rate = TypeRate.D;
             }
             else
             {
-                rate = Rate.E;
+                rate = TypeRate.E;
             }
 
-            this.socre = score;
+            this.score = score;
             this.id = id;
             this.name = name;
         }
 
-        public Rate Rate
+        public TypeRate Rate
         {
             get { return rate; }
             set { rate = value; }
         }
         public int Socre
         {
-            get { return socre; }
-            set { socre = value; }
+            get { return score; }
+            set { score = value; }
         }
         public string ID
         {
