@@ -15,22 +15,54 @@ namespace RBTree
     {
         private RBTree rbTree;
         private Graphics graphics;
-        GraphicsState blank;
         public RBTreeView()
         {
             InitializeComponent();
             rbTree = new RBTree();
             graphics = this.groupBoxRBTree.CreateGraphics();
-            blank = graphics.Save();
+            graphics.Clear(Color.WhiteSmoke);
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            Student s = new Student(Convert.ToInt32(textBoxScore.Text), textBoxID.Text, textBoxName.Text);
-            rbTree.Add(s);
-            graphics.Restore(blank);
-            Point p = new Point(350,40);
-            DrawRBTree(rbTree.Head,p,150);
+            try
+            {
+                Student s = new Student(Convert.ToInt32(textBoxScore.Text), textBoxID.Text, textBoxName.Text);
+                graphics.Clear(Color.WhiteSmoke);
+                if (!rbTree.Add(s))
+                {
+                    MessageBox.Show("插入失败");
+                }
+                if (rbTree.Head != null)
+                {
+                    DrawRBTree(rbTree.Head, new Point(350, 20), 150);
+                }
+            }
+            catch (System.Exception)
+            {
+                MessageBox.Show("输入不合法");
+            }
+        }
+
+        private void buttonDel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Student s = new Student(Convert.ToInt32(textBoxScore.Text), textBoxID.Text, textBoxName.Text);
+                graphics.Clear(Color.WhiteSmoke);
+                if (!rbTree.Remove(s))
+                {
+                    MessageBox.Show("删除失败");
+                }
+                if (rbTree.Head != null)
+                {
+                    DrawRBTree(rbTree.Head, new Point(350, 20), 150);
+                }
+            }
+            catch (System.Exception)
+            {
+                MessageBox.Show("输入不合法");
+            }
         }
 
         private void DrawRBTree(Node node,Point p,int x)
@@ -40,6 +72,9 @@ namespace RBTree
                 DrawNullNode(p);
                 return;
             }
+            Pen pen = new Pen(Color.Black,2);
+            graphics.DrawLine(pen, new Point(p.X + 20, p.Y + 20), new Point(p.X - x + 20, p.Y + 80));
+            graphics.DrawLine(pen, new Point(p.X + 20, p.Y + 20), new Point(p.X + x + 20, p.Y + 80));
             DrawNode(node,p);
             DrawRBTree(node.Left, new Point(p.X - x, p.Y + 60), x / 2);
             DrawRBTree(node.Right, new Point(p.X + x, p.Y + 60), x / 2);
@@ -58,8 +93,8 @@ namespace RBTree
             }
             graphics.FillEllipse(b1, p.X, p.Y, 40, 40);
             SolidBrush b2 = new SolidBrush(Color.White);
-            graphics.DrawString(n.RateString(), new Font("宋体", 10), b2, p.X + 12, p.Y +10);
-            graphics.DrawString(n.StudentList.Count.ToString(), new Font("宋体", 10), b2, p.X +12, p.Y + 20);
+            graphics.DrawString(n.RateString(), new Font("Arial", 10), b2, p.X + 12, p.Y + 10);
+            graphics.DrawString(n.StudentList.Count.ToString(), new Font("Arial", 10), b2, p.X + 12, p.Y + 20);
 
             b1.Dispose();
             b2.Dispose();
@@ -68,7 +103,7 @@ namespace RBTree
         private void DrawNullNode(Point p)
         {
             SolidBrush b1 = new SolidBrush(Color.Black);
-            graphics.FillEllipse(b1, p.X + 10, p.Y, 20, 20);
+            graphics.FillEllipse(b1, p.X + 10, p.Y + 10, 20, 20);
             b1.Dispose();
         }
     }

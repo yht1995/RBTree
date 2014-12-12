@@ -66,7 +66,7 @@
             // 
             this.groupBoxRBTree.Location = new System.Drawing.Point(12, 12);
             this.groupBoxRBTree.Name = "groupBoxRBTree";
-            this.groupBoxRBTree.Size = new System.Drawing.Size(767, 377);
+            this.groupBoxRBTree.Size = new System.Drawing.Size(767, 423);
             this.groupBoxRBTree.TabIndex = 0;
             this.groupBoxRBTree.TabStop = false;
             this.groupBoxRBTree.Text = "红黑树";
@@ -82,7 +82,7 @@
             this.groupBox2.Controls.Add(this.textBoxName);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Location = new System.Drawing.Point(96, 395);
+            this.groupBox2.Location = new System.Drawing.Point(96, 441);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(267, 137);
             this.groupBox2.TabIndex = 1;
@@ -106,6 +106,7 @@
             this.buttonDel.TabIndex = 2;
             this.buttonDel.Text = "删除学生";
             this.buttonDel.UseVisualStyleBackColor = true;
+            this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
             // 
             // buttonAdd
             // 
@@ -169,7 +170,7 @@
             // 
             this.groupBox3.Controls.Add(this.buttonTraversalB);
             this.groupBox3.Controls.Add(this.buttonTraversalA);
-            this.groupBox3.Location = new System.Drawing.Point(369, 396);
+            this.groupBox3.Location = new System.Drawing.Point(369, 442);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(105, 137);
             this.groupBox3.TabIndex = 2;
@@ -206,7 +207,7 @@
             this.groupBox4.Controls.Add(this.radioButtonID);
             this.groupBox4.Controls.Add(this.textBoxNameS);
             this.groupBox4.Controls.Add(this.textBoxIDS);
-            this.groupBox4.Location = new System.Drawing.Point(480, 395);
+            this.groupBox4.Location = new System.Drawing.Point(480, 441);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(245, 137);
             this.groupBox4.TabIndex = 3;
@@ -307,7 +308,7 @@
             // 
             this.groupBox5.Controls.Add(this.button2);
             this.groupBox5.Controls.Add(this.button1);
-            this.groupBox5.Location = new System.Drawing.Point(13, 396);
+            this.groupBox5.Location = new System.Drawing.Point(13, 442);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(77, 135);
             this.groupBox5.TabIndex = 4;
@@ -336,7 +337,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(791, 543);
+            this.ClientSize = new System.Drawing.Size(791, 599);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
