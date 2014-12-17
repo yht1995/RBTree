@@ -41,7 +41,7 @@ namespace RBTree
 
         private double CalcAverage()
         {
-            int sum = 0;
+            double sum = 0;
             foreach (Student s in list)
             {
                 sum += s.Socre;

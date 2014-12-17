@@ -25,7 +25,7 @@ namespace RBTree
             item.SubItems.Add(s.ID);
             item.SubItems.Add(s.Socre.ToString());
             this.listView.Items.Add(item);
-            textBoxNum.Text = listView.Items.Count.ToString("%4f");
+            textBoxNum.Text = listView.Items.Count.ToString();
         }
 
         public void AddStudent(List<Student> list)
