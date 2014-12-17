@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBoxRBTree = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonRand = new System.Windows.Forms.Button();
             this.buttonDel = new System.Windows.Forms.Button();
@@ -63,16 +62,6 @@
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBoxRBTree
-            // 
-            this.groupBoxRBTree.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBoxRBTree.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBoxRBTree.Location = new System.Drawing.Point(12, 12);
-            this.groupBoxRBTree.Name = "groupBoxRBTree";
-            this.groupBoxRBTree.Size = new System.Drawing.Size(767, 423);
-            this.groupBoxRBTree.TabIndex = 0;
-            this.groupBoxRBTree.TabStop = false;
             // 
             // groupBox2
             // 
@@ -228,6 +217,7 @@
             this.buttonSearch.TabIndex = 4;
             this.buttonSearch.Text = "检索";
             this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // textBoxScoreH
             // 
@@ -323,7 +313,7 @@
             // 
             // buttonExport
             // 
-            this.buttonExport.Location = new System.Drawing.Point(7, 59);
+            this.buttonExport.Location = new System.Drawing.Point(7, 48);
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Size = new System.Drawing.Size(61, 23);
             this.buttonExport.TabIndex = 0;
@@ -333,7 +323,7 @@
             // 
             // buttonImport
             // 
-            this.buttonImport.Location = new System.Drawing.Point(7, 30);
+            this.buttonImport.Location = new System.Drawing.Point(7, 19);
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Size = new System.Drawing.Size(61, 23);
             this.buttonImport.TabIndex = 0;
@@ -354,9 +344,9 @@
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBoxRBTree);
             this.Name = "RBTreeView";
             this.Text = " ";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RBTreeView_MouseDown);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -369,7 +359,6 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBoxRBTree;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button buttonRand;
         private System.Windows.Forms.Button buttonDel;

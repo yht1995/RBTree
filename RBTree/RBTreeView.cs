@@ -13,13 +13,58 @@ namespace RBTree
         private RBTree rbTree;
         private Graphics graphics;
         Random random = new Random();
+        private HashTable<Student> hashID;
+        private HashTable<Student> hashName;
+        private List<NodeLocation> nodeTable = new List<NodeLocation>();
 
         public RBTreeView()
         {
             InitializeComponent();
             rbTree = new RBTree();
-            graphics = this.groupBoxRBTree.CreateGraphics();
+            hashID = new HashTable<Student>(1000,
+                delegate(Student s)
+                {
+                    return (s.ID.GetHashCode());
+                },
+                delegate(Student a, Student b)
+                {
+                    return (a.ID == b.ID);
+                });
+            hashName = new HashTable<Student>(1000,
+                delegate(Student s)
+                {
+                    return (s.Name.GetHashCode());
+                },
+                delegate(Student a,Student b)
+                {
+                    return(a.Name == b.Name);
+                });
+            graphics = this.CreateGraphics();
             graphics.Clear(Color.WhiteSmoke);
+            for (int i = 0; i <= 9;i++)
+            {
+                TypeRate type = (TypeRate)i;
+                string s;
+                switch (type)
+                {
+                    case (TypeRate.AAplus):
+                        s = "AA+";
+                        break;
+                    case (TypeRate.Bplus):
+                        s = "B+";
+                        break;
+                    case (TypeRate.Bminus):
+                        s = "B-";
+                        break;
+                    case (TypeRate.Cplus):
+                        s = "C+";
+                        break;
+                    default:
+                        s = type.ToString();
+                        break;
+                }
+                comboBoxRateS.Items.Add(s);
+            }
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -28,6 +73,8 @@ namespace RBTree
             {
                 Student s = new Student(Convert.ToInt32(textBoxScore.Text), textBoxID.Text, textBoxName.Text);
                 rbTree.Add(s);
+                hashID.Add(s);
+                hashName.Add(s);
                 DoubleBufDraw();
             }
             catch (System.Exception ex)
@@ -42,6 +89,8 @@ namespace RBTree
             {
                 Student s = new Student(Convert.ToInt32(textBoxScore.Text), textBoxID.Text, textBoxName.Text);
                 rbTree.Remove(s);
+                hashID.Remove(s);
+                hashID.Remove(s);
                 DoubleBufDraw();
             }
             catch (System.Exception ex)
@@ -58,6 +107,7 @@ namespace RBTree
             g.Clear(Color.WhiteSmoke);
             if (rbTree.Head != null)
             {
+                nodeTable.Clear();
                 DrawRBTree(g,rbTree.Head, new Point(350, 20), 150);
             }
             myBuffer.Render(graphics);
@@ -95,9 +145,9 @@ namespace RBTree
             SolidBrush b2 = new SolidBrush(Color.White);
             graphics.DrawString(n.RateString(), new Font("Arial", 10), b2, p.X + 12, p.Y + 8);
             graphics.DrawString(n.StudentList.Count.ToString(), new Font("Arial", 10), b2, p.X + 12, p.Y + 22);
-
             b1.Dispose();
             b2.Dispose();
+            nodeTable.Add(new NodeLocation(n.Key, new Point(p.X + 20,p.Y + 20), 20));
         }
 
         private void DrawNullNode(Graphics graphics, Point p)
@@ -136,6 +186,8 @@ namespace RBTree
                     str = strContent.Split(' ');
                     Student s = new Student(Convert.ToInt32(str[2]), str[1], str[0]);
                     rbTree.Add(s);
+                    hashID.Add(s);
+                    hashName.Add(s);
                 }
                 sr.Close();
                 DoubleBufDraw();
@@ -230,5 +282,105 @@ namespace RBTree
             }
         }
 
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            #region ID 
+            if (radioButtonID.Checked)
+            {
+                List<Student> list = hashID.Find(new Student(0,textBoxIDS.Text,""));
+                if (list.Count != 0)
+                {
+                    StudentListView listView = new StudentListView();
+                    listView.Text = "按学号查找";
+                    listView.AddStudent(list);
+                    listView.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("没有找到！");
+                }
+            }
+            #endregion
+            #region Name
+            else if (radioButtonName.Checked)
+            {
+                List<Student> list = hashName.Find(new Student(0, "", textBoxNameS.Text));
+                if (list.Count != 0)
+                {
+                    StudentListView listView = new StudentListView();
+                    listView.Text = "按姓名查找";
+                    listView.AddStudent(list);
+                    listView.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("没有找到！");
+                }
+            }
+            #endregion
+            #region Rate
+            else if (radioButtonRate.Checked)
+            {
+                TypeRate rate = (TypeRate)comboBoxRateS.SelectedIndex;
+                List<Student> list = rbTree.FindInRate(rate);
+                if (list.Count != 0)
+                {
+                    StudentListView listView = new StudentListView();
+                    listView.Text = "按成绩段查找";
+                    listView.AddStudent(list);
+                    listView.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("没有找到！");
+                }
+            }
+            #endregion
+            #region Score
+            else if (radioButtonScore.Checked)
+            {
+                int min = Convert.ToInt32(textBoxScoreL.Text);
+                int max = Convert.ToInt32(textBoxScoreH.Text);
+                if (min < 0 || max > 100 || min > max)
+                {
+                    MessageBox.Show("输入不合法");
+                }
+                else
+                {
+                    TypeRate rate = (TypeRate)comboBoxRateS.SelectedIndex;
+                    List<Student> list = rbTree.FindInScore(min, max);
+                    if (list.Count != 0)
+                    {
+                        StudentListView listView = new StudentListView();
+                        listView.Text = "按分数段查找";
+                        listView.AddStudent(list);
+                        listView.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("没有找到！");
+                    }
+                }
+            }
+            #endregion
+        }
+
+        private void RBTreeView_MouseDown(object sender, MouseEventArgs e)
+        {
+            foreach (NodeLocation l in nodeTable)
+            {
+                if (l.InCircle(e.Location))
+                {
+                    List<Student> list = rbTree.FindInRate(l.Rate);
+                    if (list.Count != 0)
+                    {
+                        StudentListView listView = new StudentListView();
+                        listView.Text = "节点明细";
+                        listView.AddStudent(list);
+                        listView.ShowDialog();
+                    }
+                }
+            }
+        }
     }
 }
