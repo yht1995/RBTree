@@ -39,7 +39,7 @@ namespace RBTree
             col2.Text = "学号";
             listView.Columns.Add(col2);
             ColumnHeader col3 = new ColumnHeader();
-            col3.Width = 100;
+            col3.Width = 50;
             col3.Text = "成绩";
             listView.Columns.Add(col3);
         }
