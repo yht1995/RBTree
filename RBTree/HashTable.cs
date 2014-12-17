@@ -25,6 +25,10 @@ namespace RBTree
 
         public void Add(T item)
         {
+            if (table[Pos(item)] == null)
+            {
+                table[Pos(item)] = new List<T>();
+            }
             table[Pos(item)].Add(item);
         }
 
@@ -46,7 +50,8 @@ namespace RBTree
 
         private int Pos(T item)
         {
-            return (hashFunc(item) % num);
+            int pos = (hashFunc(item)) % num;
+            return (Math.Abs(pos));
         }
     }
 }
