@@ -28,6 +28,18 @@ namespace RBTree
             this.listView.Items.Add(item);
         }
 
+        public void AddStudent(List<Student> list)
+        {
+            foreach (Student s in list)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = s.Name;
+                item.SubItems.Add(s.ID);
+                item.SubItems.Add(s.Socre.ToString());
+                this.listView.Items.Add(item);
+            }
+        }
+
         private void InitListView(ListView ListView)
         {
             ColumnHeader col1 = new ColumnHeader();
