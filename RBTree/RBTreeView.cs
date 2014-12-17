@@ -255,31 +255,9 @@ namespace RBTree
             list.Text = "层次遍历";
             if (rbTree.Head != null)
             {
-                LevelTraversal(rbTree.Head, list);
+                list.AddStudent(rbTree.LevelTraversal());
             }
             list.ShowDialog();
-        }
-
-        private void LevelTraversal(Node node, StudentListView s)
-        {
-            Queue<Node> qNode = new Queue<Node>();
-            qNode.Enqueue(node);
-            while (qNode.Count != 0)
-            {
-                Node top = qNode.Dequeue();
-                if (top.Left != null)
-                {
-                    qNode.Enqueue(top.Left);
-                }
-                if (top.Right != null)
-                {
-                    qNode.Enqueue(top.Right);
-                }
-                foreach (Student stu in top.StudentList)
-                {
-                    s.AddStudent(stu);
-                }
-            }
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
@@ -381,6 +359,14 @@ namespace RBTree
                     }
                 }
             }
+        }
+
+        private void buttonStatic_Click(object sender, EventArgs e)
+        {
+            StaticView staticView = new StaticView();
+            List<Student> list = rbTree.LevelTraversal();
+            staticView.InputData(list);
+            staticView.Show();
         }
     }
 }

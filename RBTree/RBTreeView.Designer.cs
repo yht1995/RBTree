@@ -57,6 +57,7 @@
             this.buttonImport = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.buttonStatic = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -302,6 +303,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.buttonStatic);
             this.groupBox5.Controls.Add(this.buttonExport);
             this.groupBox5.Controls.Add(this.buttonImport);
             this.groupBox5.Location = new System.Drawing.Point(13, 442);
@@ -334,6 +336,16 @@
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // buttonStatic
+            // 
+            this.buttonStatic.Location = new System.Drawing.Point(7, 100);
+            this.buttonStatic.Name = "buttonStatic";
+            this.buttonStatic.Size = new System.Drawing.Size(61, 23);
+            this.buttonStatic.TabIndex = 1;
+            this.buttonStatic.Text = "统计";
+            this.buttonStatic.UseVisualStyleBackColor = true;
+            this.buttonStatic.Click += new System.EventHandler(this.buttonStatic_Click);
             // 
             // RBTreeView
             // 
@@ -388,6 +400,7 @@
         private System.Windows.Forms.Button buttonImport;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Button buttonStatic;
     }
 }
 

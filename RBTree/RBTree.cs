@@ -520,5 +520,28 @@ namespace RBTree
             }
             return list;
         }
+        public List<Student> LevelTraversal()
+        {
+            Queue<Node> qNode = new Queue<Node>();
+            List<Student> list = new List<Student>();
+            qNode.Enqueue(_head);
+            while (qNode.Count != 0)
+            {
+                Node top = qNode.Dequeue();
+                if (top.Left != null)
+                {
+                    qNode.Enqueue(top.Left);
+                }
+                if (top.Right != null)
+                {
+                    qNode.Enqueue(top.Right);
+                }
+                foreach (Student stu in top.StudentList)
+                {
+                    list.Add(stu);
+                }
+            }
+            return list;
+        }
     }
 }
