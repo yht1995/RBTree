@@ -8,31 +8,40 @@ namespace RBTree
 {
     class HashTable<T>
     {
-        private List<T>[] table;
-        private delegate int HashFunc(T item);
+        public delegate int HashFunc(T item);
+        public delegate bool Match(T a,T b);
         private HashFunc hashFunc;
+        private Match match;
+        private List<T>[] table;
         private int num;
 
-        public HashTable(int num,HashFunc hashFunc)
+        public HashTable(int num,HashFunc hashFunc,Match match)
         {
             this.hashFunc = hashFunc;
+            this.match = match;
             this.table = new List<T>[num];
             this.num = num;
         }
 
-        public void Insert(T item)
+        public void Add(T item)
         {
             table[Pos(item)].Add(item);
         }
 
-        public T Find(T item,Predicate<T> match)
+        public List<T> Find(T item)
         {
-            return table[Pos(item)].Find(match);
+            return table[Pos(item)].FindAll(delegate(T a)
+            {
+                return (match(a,item));
+            });
         }
 
-        public bool Delete(T item)
+        public int Remove(T item)
         {
-            return(table[Pos(item)].Remove(item));
+            return (table[Pos(item)].RemoveAll(delegate(T a)
+            {
+                return (match(a, item));
+            }));
         }
 
         private int Pos(T item)
