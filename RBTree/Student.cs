@@ -20,7 +20,6 @@ namespace RBTree
         E = 0
     }
 
-
     public class Student
     {
         private TypeRate rate;

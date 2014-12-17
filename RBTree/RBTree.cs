@@ -67,6 +67,30 @@ namespace RBTree
                     return (this.rate.ToString());
             }
         }
+
+        public int RateMax()
+        {
+            if ((int)rate <9)
+            {
+                return (99 - (9 - ((int)rate)) * 5);
+            }
+            else
+            {
+                return (100);
+            }
+        }
+
+        public int RateMin()
+        {
+            if ((int)rate > 0)
+            {
+                return (95 - (9 - ((int)rate)) * 5);
+            }
+            else
+            {
+                return (0);
+            }
+        }
     }
 
     public class RBTree
@@ -439,6 +463,62 @@ namespace RBTree
             right.Left = left.Right;
             left.Right = right;
             return left;
+        }
+
+        public List<Student> FindInRate(TypeRate rate)
+        {
+            if (_head == null)
+            {
+                return null;
+            }
+            Node parent = null, current = _head;
+            while (current != null)
+            {
+                if (current.Key == rate)
+                {
+                    return (current.StudentList);
+                }
+                parent = current;
+                current = (rate < parent.Key) ? parent.Left : parent.Right;
+            }
+            return null;
+        }
+
+        public List<Student> FindInScore(int min,int max)
+        {
+            List<Student> list = new List<Student>();
+            if (_head == null)
+            {
+                return null;
+            }
+            Node parent = null, current = _head;
+            while (current != null)
+            {
+                if (current.RateMax() >= max || current.RateMin() <= min)
+                {
+                    foreach(Student s in current.StudentList)
+                    {
+                        if (s.Socre<= max && s.Socre >= min)
+                        {
+                            list.Add(s);
+                        }
+                    }
+                }
+                parent = current;
+                if (min < parent.RateMin())
+                {
+                    current = parent.Left;
+                }
+                else if (max > parent.RateMax())
+                {
+                    current = parent.Right;
+                }
+                else
+                {
+                    current = null;
+                }
+            }
+            return list;
         }
     }
 }

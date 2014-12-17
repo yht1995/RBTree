@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.listView = new System.Windows.Forms.ListView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxNum = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // listView
@@ -40,20 +42,42 @@
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             // 
-            // StudentList
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 436);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "学生个数";
+            // 
+            // textBoxNum
+            // 
+            this.textBoxNum.Location = new System.Drawing.Point(83, 433);
+            this.textBoxNum.Name = "textBoxNum";
+            this.textBoxNum.ReadOnly = true;
+            this.textBoxNum.Size = new System.Drawing.Size(77, 21);
+            this.textBoxNum.TabIndex = 2;
+            // 
+            // StudentListView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(341, 435);
+            this.ClientSize = new System.Drawing.Size(341, 460);
+            this.Controls.Add(this.textBoxNum);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.listView);
-            this.Name = "StudentList";
+            this.Name = "StudentListView";
             this.Text = "数据";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.ListView listView;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxNum;
     }
 }
