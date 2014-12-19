@@ -226,29 +226,17 @@ namespace RBTree
 
         private void buttonInorderTraversal_Click(object sender, EventArgs e)
         {
-            StudentListView list = new StudentListView();
-            list.Text = "中序遍历";
+            StudentListView listView = new StudentListView();
+            listView.Text = "中序遍历";
             if (rbTree.Head != null)
             {
-                InorderTraversal(rbTree.Head,list);
+                List<Student> list = new List<Student>();
+                rbTree.InorderTraversal(rbTree.Head,list);
+                listView.AddStudent(list);
             }
-            list.ShowDialog();
+            listView.ShowDialog();
         }
         
-        private void InorderTraversal(Node node, StudentListView s)
-        {
-            if (node == null)
-            {
-                return;
-            }
-            InorderTraversal(node.Left, s);
-            foreach (Student stu in node.StudentList)
-            {
-                s.AddStudent(stu);
-            }
-            InorderTraversal(node.Right, s);
-        }
-
         private void buttonLevelTraversal_Click(object sender, EventArgs e)
         {
             StudentListView list = new StudentListView();

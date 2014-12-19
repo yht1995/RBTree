@@ -543,5 +543,19 @@ namespace RBTree
             }
             return list;
         }
+
+        public void InorderTraversal(Node node,List<Student> s)
+        {
+            if (node == null)
+            {
+                return;
+            }
+            InorderTraversal(node.Left,s);
+            foreach (Student stu in node.StudentList)
+            {
+                s.Add(stu);
+            }
+            InorderTraversal(node.Right,s);
+        }
     }
 }
