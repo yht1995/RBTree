@@ -53,11 +53,11 @@
             this.textBoxNameS = new System.Windows.Forms.TextBox();
             this.textBoxIDS = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.buttonStatic = new System.Windows.Forms.Button();
             this.buttonExport = new System.Windows.Forms.Button();
             this.buttonImport = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.buttonStatic = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -313,6 +313,16 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "文件操作";
             // 
+            // buttonStatic
+            // 
+            this.buttonStatic.Location = new System.Drawing.Point(7, 100);
+            this.buttonStatic.Name = "buttonStatic";
+            this.buttonStatic.Size = new System.Drawing.Size(61, 23);
+            this.buttonStatic.TabIndex = 1;
+            this.buttonStatic.Text = "统计";
+            this.buttonStatic.UseVisualStyleBackColor = true;
+            this.buttonStatic.Click += new System.EventHandler(this.buttonStatic_Click);
+            // 
             // buttonExport
             // 
             this.buttonExport.Location = new System.Drawing.Point(7, 48);
@@ -337,16 +347,6 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
-            // buttonStatic
-            // 
-            this.buttonStatic.Location = new System.Drawing.Point(7, 100);
-            this.buttonStatic.Name = "buttonStatic";
-            this.buttonStatic.Size = new System.Drawing.Size(61, 23);
-            this.buttonStatic.TabIndex = 1;
-            this.buttonStatic.Text = "统计";
-            this.buttonStatic.UseVisualStyleBackColor = true;
-            this.buttonStatic.Click += new System.EventHandler(this.buttonStatic_Click);
-            // 
             // RBTreeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -357,7 +357,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Name = "RBTreeView";
-            this.Text = " ";
+            this.Text = " 红黑树";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RBTreeView_MouseDown);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
