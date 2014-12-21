@@ -5,13 +5,12 @@ namespace RBTree
 {
     public class Node
     {
-        private TypeRate rate; //数据
-        private Node left; //左孩子
-        private Node right; //右孩子
-        private bool color; //色
+        private TypeRate rate;
+        private Node left; 
+        private Node right;
+        private bool color; 
         private List<Student> studentList;
 
-        //构造方法
         public Node(Student s)
         {
             rate = s.Rate;
@@ -94,8 +93,8 @@ namespace RBTree
     }
 
     public class RBTree
-    {    //成员变量
-        private Node _head; //头指针
+    {
+        private Node _head;                         //头指针
 
         public Node Head
         {
@@ -103,11 +102,11 @@ namespace RBTree
             set { _head = value; }
         }
 
-        private Node[] path = new Node[32]; //记录访问路径上的结点
-        private int p; //表示当前访问到的结点在_path上的索引
+        private Node[] path = new Node[32];         //记录访问路径上的结点
+        private int p;                              //表示当前访问到的结点在_path上的索引
 
-        public bool Add(Student s) //添加一个元素
-        {  //如果是空树，则新结点成为二叉排序树的根
+        public bool Add(Student s)                  //添加一个元素
+        {                                           //如果是空树，则新结点成为二叉排序树的根
             if (_head == null)
             {
                 _head = new Node(s);
@@ -115,17 +114,15 @@ namespace RBTree
                 return true;
             }
             p = 0;
-            //parent为上一次访问的结点，current为当前访问结点
-            Node parent = null, current = _head;
+            Node parent = null, current = _head;    //parent为上一次访问的结点，current为当前访问结点
             while (current != null)
             {
-                path[p++] = current; //将路径上的结点插入数组
-                //如果插入值已存在，则插入失败
+                path[p++] = current;                //将路径上的结点插入数组
                 if (current.Key == s.Rate)
                 {
                     Student find = current.StudentList.Find(delegate(Student a)
                     {
-                        return (a.ID == s.ID && a.Name == s.Name);
+                        return (a.ID == s.ID);
                     }); 
                     if (find == null)
                     {
@@ -139,18 +136,17 @@ namespace RBTree
                     }
                 }
                 parent = current;
-                //当插入值小于当前结点，则继续访问左子树，否则访问右子树
                 current = (s.Rate < parent.Key) ? parent.Left : parent.Right;
             }
-            current = new Node(s); //创建新结点
+            current = new Node(s);                  //创建新结点
             current.IsRed = true;
-            if (s.Rate < parent.Key) //如果插入值小于双亲结点的值
+            if (s.Rate < parent.Key)                //如果插入值小于双亲结点的值
             {
-                parent.Left = current; //成为左孩子
+                parent.Left = current;              //成为左孩子
             }
-            else //如果插入值大于双亲结点的值
+            else                                    //如果插入值大于双亲结点的值
             {
-                parent.Right = current; //成为右孩子
+                parent.Right = current;             //成为右孩子
             }
             if (!parent.IsRed)
             {
@@ -158,7 +154,7 @@ namespace RBTree
             }
             path[p] = current;
             //回溯并旋转
-            while ((p -= 2) >= 0) //现在p指向插入点的祖父结点
+            while ((p -= 2) >= 0)                   //现在p指向插入点的祖父结点
             {
                 Node grandParent = path[p];
                 parent = path[p + 1];
@@ -168,16 +164,16 @@ namespace RBTree
                 }
                 Node uncle = grandParent.Left == parent ? grandParent.Right : grandParent.Left;
                 current = path[p + 2];
-                if (IsRed(uncle)) //叔父存在并且为红色的情况
+                if (IsRed(uncle))                   //叔父存在并且为红色的情况
                 {
                     parent.IsRed = false;
                     uncle.IsRed = false;
-                    if (p > 0) //如果祖父不是根结点，则将其染成红色
+                    if (p > 0)                      //如果祖父不是根结点，则将其染成红色
                     {
                         grandParent.IsRed = true;
                     }
                 }
-                else //叔父不存在或为黑的情况需要旋转
+                else                                //叔父不存在或为黑的情况需要旋转
                 {
                     Node newRoot;
                     if (grandParent.Left == parent) //如果当前结点及父结点同为左孩子或右孩子
@@ -188,11 +184,11 @@ namespace RBTree
                     {
                         newRoot = (parent.Right == current) ? RR(grandParent) : RL(grandParent);
                     }
-                    grandParent.IsRed = true; //祖父染成红色
-                    newRoot.IsRed = false; //新根染成黑色
+                    grandParent.IsRed = true;       //祖父染成红色
+                    newRoot.IsRed = false;          //新根染成黑色
                     //将新根同曾祖父连接
                     ReplaceChildOfNodeOrRoot((p > 0) ? path[p - 1] : null, grandParent, newRoot);
-                    return true; //旋转后不需要继续回溯，添加成功，直接退出
+                    return true;                    //旋转后不需要继续回溯，添加成功，直接退出
                 }
             }
             return true;
@@ -248,7 +244,7 @@ namespace RBTree
                 {
                     Student find = node.StudentList.Find(delegate(Student a)
                     {
-                        return (a.ID == s.ID && a.Name == s.Name);
+                        return (a.ID == s.ID);
                     }); 
                     if (find == null)
                     {
@@ -260,16 +256,16 @@ namespace RBTree
                     }
                     if (node.StudentList.Count == 0)
                     {
-                        RemoveNode(node);//现在p指向被删除结点
+                        RemoveNode(node);               //现在p指向被删除结点
                     }
-                    return true; //返回true表示删除成功
+                    return true;                        //返回true表示删除成功
                 }
                 if (s.Rate < node.Key)
-                {   //如果删除值小于当前结点，则向左子树继续寻找
+                {                                       //如果删除值小于当前结点，则向左子树继续寻找
                     node = node.Left;
                 }
                 else
-                {   //如果删除值大于当前结点，则向右子树继续寻找
+                {                                       //如果删除值大于当前结点，则向右子树继续寻找
                     node = node.Right;
                 }
             }
@@ -278,14 +274,14 @@ namespace RBTree
         //删除指定结点
         private void RemoveNode(Node node)
         {
-            Node tmp = null; //tmp最终指向实际被删除的结点
+            Node tmp = null;                            //tmp最终指向实际被删除的结点
             //当被删除结点存在左右子树时
             if (node.Left != null && node.Right != null)
             {
-                tmp = node.Left; //获取左子树
+                tmp = node.Left;                        //获取左子树
                 path[++p] = tmp;
-                while (tmp.Right != null) //获取node的中序遍历前驱结点，并存放于tmp中
-                {   //找到左子树中的最右下结点
+                while (tmp.Right != null)               //获取node的中序遍历前驱结点，并存放于tmp中
+                {                                       //找到左子树中的最右下结点
                     tmp = tmp.Right;
                     path[++p] = tmp;
                 }
@@ -299,7 +295,7 @@ namespace RBTree
             //当只有左子树或右子树或为叶子结点时
             //首先找到惟一的孩子结点
             Node newTmp = tmp.Left;
-            if (newTmp == null) //如果只有右孩子或没孩子
+            if (newTmp == null)                         //如果只有右孩子或没孩子
             {
                 newTmp = tmp.Right;
             }
@@ -307,11 +303,11 @@ namespace RBTree
             {
                 Node parent = path[p - 1];
                 if (parent.Left == tmp)
-                {   //如果被删结点是左孩子
+                {                                       //如果被删结点是左孩子
                     parent.Left = newTmp;
                 }
                 else
-                {   //如果被删结点是右孩子
+                {                                        //如果被删结点是右孩子
                     parent.Right = newTmp;
                 }
                 if (!tmp.IsRed && IsRed(newTmp))
@@ -320,7 +316,7 @@ namespace RBTree
                     return;
                 }
             }
-            else  //当删除的是根结点时
+            else                                         //当删除的是根结点时
             {
                 _head = newTmp;
                 if (_head != null)
@@ -364,7 +360,7 @@ namespace RBTree
                     path[p] = parent;
                     path[++p] = current;
                 }
-                else //黑兄的情况
+                else//黑兄的情况
                 {
                     //黑兄二黑侄
                     if (IsNullOrBlack(sibling.Left) && IsNullOrBlack(sibling.Right))

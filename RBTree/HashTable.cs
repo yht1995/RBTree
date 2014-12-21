@@ -10,15 +10,18 @@ namespace RBTree
     {
         public delegate int HashFunc(T item);
         public delegate bool Match(T a,T b);
+        public delegate bool UniqueMatch(T a, T b);
         private HashFunc hashFunc;
         private Match match;
+        private UniqueMatch uniqueMatch;
         private List<T>[] table;
         private int num;
 
-        public HashTable(int num,HashFunc hashFunc,Match match)
+        public HashTable(int num,HashFunc hashFunc,Match match,UniqueMatch uniqueMatch)
         {
             this.hashFunc = hashFunc;
             this.match = match;
+            this.uniqueMatch = uniqueMatch;
             this.table = new List<T>[num];
             this.num = num;
         }
@@ -44,7 +47,7 @@ namespace RBTree
         {
             return (table[Pos(item)].RemoveAll(delegate(T a)
             {
-                return (match(a, item));
+                return (uniqueMatch(a, item));
             }));
         }
 

@@ -29,6 +29,10 @@ namespace RBTree
                 delegate(Student a, Student b)
                 {
                     return (a.ID == b.ID);
+                },
+                delegate(Student a, Student b)
+                {
+                    return (a.ID == b.ID);
                 });
             hashName = new HashTable<Student>(1000,
                 delegate(Student s)
@@ -38,6 +42,10 @@ namespace RBTree
                 delegate(Student a,Student b)
                 {
                     return(a.Name == b.Name);
+                },
+                delegate(Student a, Student b)
+                {
+                    return (a.ID == b.ID);
                 });
             graphics = this.CreateGraphics();
             graphics.Clear(Color.WhiteSmoke);
@@ -87,10 +95,16 @@ namespace RBTree
         {
             try
             {
-                Student s = new Student(Convert.ToInt32(textBoxScore.Text), textBoxID.Text, textBoxName.Text);
-                rbTree.Remove(s);
-                hashID.Remove(s);
-                hashID.Remove(s);
+                Student s = new Student(0, textBoxID.Text,"");
+                List<Student> list = new List<Student>();
+                list = hashID.Find(s);
+                if (list.Count != 1)
+                {
+                    throw (new Exception("该ID对应学生异常"));
+                }
+                rbTree.Remove(list[0]);
+                hashName.Remove(list[0]);
+                hashID.Remove(list[0]);
                 DoubleBufDraw();
             }
             catch (System.Exception ex)
@@ -201,27 +215,18 @@ namespace RBTree
             {
                 string FileName = this.saveFileDialog.FileName;
                 StreamWriter sr = new StreamWriter(FileName, false, Encoding.Default);
+                List<Student> list = new List<Student>();
                 if (rbTree.Head != null)
                 {
-                    InorderWrite(rbTree.Head, sr);
+                    rbTree.InorderTraversal(rbTree.Head, list);
+                }
+                foreach (Student stu in list)
+                {
+                    sr.WriteLine(stu.Name + " " + stu.ID + " " + stu.Socre.ToString());
                 }
                 sr.Flush();
                 sr.Close();
             }
-        }
-
-        private void InorderWrite(Node node, StreamWriter s)
-        {
-            if (node == null)
-            {
-                return;
-            }
-            InorderWrite(node.Left,s);
-            foreach (Student stu in node.StudentList)
-            {
-                s.WriteLine(stu.Name + " " + stu.ID + " " + stu.Socre.ToString());
-            }
-            InorderWrite(node.Right,s);
         }
 
         private void buttonInorderTraversal_Click(object sender, EventArgs e)
