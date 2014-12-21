@@ -479,7 +479,6 @@ namespace RBTree
             }
             return null;
         }
-
         public List<Student> FindInScore(int min,int max)
         {
             List<Student> list = new List<Student>();
@@ -504,6 +503,10 @@ namespace RBTree
                 if (min < parent.RateMin())
                 {
                     current = parent.Left;
+                    if (max > parent.RateMax())
+                    {
+                        throw (new Exception("分数范围应该在同一成绩段或相邻成绩段"));
+                    }
                 }
                 else if (max > parent.RateMax())
                 {
@@ -539,7 +542,6 @@ namespace RBTree
             }
             return list;
         }
-
         public void InorderTraversal(Node node,List<Student> s)
         {
             if (node == null)

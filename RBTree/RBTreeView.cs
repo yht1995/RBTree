@@ -320,7 +320,6 @@ namespace RBTree
                     }
                     else
                     {
-                        TypeRate rate = (TypeRate)comboBoxRateS.SelectedIndex;
                         List<Student> list = rbTree.FindInScore(min, max);
                         if (list.Count != 0)
                         {
