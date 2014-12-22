@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RBTreeView));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonRand = new System.Windows.Forms.Button();
             this.buttonDel = new System.Windows.Forms.Button();
@@ -356,6 +357,7 @@
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RBTreeView";
             this.Text = " 红黑树";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RBTreeView_MouseDown);
