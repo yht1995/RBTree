@@ -523,21 +523,24 @@ namespace RBTree
         {
             Queue<Node> qNode = new Queue<Node>();
             List<Student> list = new List<Student>();
-            qNode.Enqueue(_head);
-            while (qNode.Count != 0)
+            if (_head != null)
             {
-                Node top = qNode.Dequeue();
-                if (top.Left != null)
+                qNode.Enqueue(_head);
+                while (qNode.Count != 0)
                 {
-                    qNode.Enqueue(top.Left);
-                }
-                if (top.Right != null)
-                {
-                    qNode.Enqueue(top.Right);
-                }
-                foreach (Student stu in top.StudentList)
-                {
-                    list.Add(stu);
+                    Node top = qNode.Dequeue();
+                    if (top.Left != null)
+                    {
+                        qNode.Enqueue(top.Left);
+                    }
+                    if (top.Right != null)
+                    {
+                        qNode.Enqueue(top.Right);
+                    }
+                    foreach (Student stu in top.StudentList)
+                    {
+                        list.Add(stu);
+                    }
                 }
             }
             return list;
