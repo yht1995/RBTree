@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RBTree.HashTable&lt;T&gt;" Collapsed="true">
+    <Position X="2.25" Y="1.75" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="RBTree.HashTable&lt;T&gt;.HashFunc" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>HashTable.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="RBTree.HashTable&lt;T&gt;.Match" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>HashTable.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="RBTree.HashTable&lt;T&gt;.UniqueMatch" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>HashTable.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAIAACAAAQAAAABAAAAABAAAAACIAAAAAAAAQAAAAAI=</HashCode>
+      <FileName>HashTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RBTree.NodeLocation" Collapsed="true">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAgIAEAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAIAAA=</HashCode>
+      <FileName>NodeLocation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RBTree.Node" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAECAAAAAgAQAAAAAAAgAAAAIAACACAKAAAACgAA=</HashCode>
+      <FileName>RBTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RBTree.RBTree" Collapsed="true">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAEAAUAAAAAIEAAAACBIgCQAAQAAAAAEgAQBQBAAA=</HashCode>
+      <FileName>RBTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RBTree.RBTreeView" Collapsed="true">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAhAsQAACQAiRgAAAiAxiQmQAQCEAgABDQCALBCAiE=</HashCode>
+      <FileName>RBTreeView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RBTree.StaticView" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAADEgAAACASAlAgBAGCAAACAAAAAAAAACAAAIAgAAA=</HashCode>
+      <FileName>StaticView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RBTree.Student" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAEAAAAAAgAAAAACIAgSAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Student.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RBTree.StudentListView" Collapsed="true">
+    <Position X="5.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAgAAACAAABAAAACAAAACAAAAAAEAABIAAoAAAAI=</HashCode>
+      <FileName>StudentListView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="RBTree.TypeRate" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAABAgQAAAAAAAAAAAAAAAAAAAAgAAAApgEAAAA=</HashCode>
+      <FileName>Student.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
