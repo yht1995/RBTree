@@ -12,6 +12,14 @@ namespace RBTree
 {
     public partial class StudentListView : Form
     {
+        private Student selected;
+        private List<Student> list = new List<Student>();
+        public Student Selected
+        {
+            get { return selected; }
+            set { selected = value; }
+        }
+
         public StudentListView()
         {
             InitializeComponent();
@@ -32,6 +40,7 @@ namespace RBTree
         {
             foreach (Student s in list)
             {
+                this.list.Add(s);
                 ListViewItem item = new ListViewItem();
                 item.Text = s.Name;
                 item.SubItems.Add(s.ID);
@@ -55,6 +64,11 @@ namespace RBTree
             col3.Width = 50;
             col3.Text = "成绩";
             listView.Columns.Add(col3);
+        }
+
+        private void listView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.selected = list[listView.SelectedItems[0].Index];
         }
     }
 }

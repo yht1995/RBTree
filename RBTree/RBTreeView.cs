@@ -257,59 +257,24 @@ namespace RBTree
         {
             try
             {
-                #region ID
+                List<Student> list = new List<Student>();
+                StudentListView listView = new StudentListView();
                 if (radioButtonID.Checked)
                 {
-                    List<Student> list = hashID.Find(new Student(0, textBoxIDS.Text, ""));
-                    if (list.Count != 0)
-                    {
-                        StudentListView listView = new StudentListView();
-                        listView.Text = "按学号查找";
-                        listView.AddStudent(list);
-                        listView.ShowDialog();
-                    }
-                    else
-                    {
-                        MessageBox.Show("没有找到！");
-                    }
+                    list = hashID.Find(new Student(0, textBoxIDS.Text, ""));
+                    listView.Text = "按学号查找";
                 }
-                #endregion
-                #region Name
                 else if (radioButtonName.Checked)
                 {
-                    List<Student> list = hashName.Find(new Student(0, "", textBoxNameS.Text));
-                    if (list.Count != 0)
-                    {
-                        StudentListView listView = new StudentListView();
-                        listView.Text = "按姓名查找";
-                        listView.AddStudent(list);
-                        listView.ShowDialog();
-                    }
-                    else
-                    {
-                        MessageBox.Show("没有找到！");
-                    }
+                    list = hashName.Find(new Student(0, "", textBoxNameS.Text));
+                    listView.Text = "按姓名查找";
                 }
-                #endregion
-                #region Rate
                 else if (radioButtonRate.Checked)
                 {
                     TypeRate rate = (TypeRate)comboBoxRateS.SelectedIndex;
-                    List<Student> list = rbTree.FindInRate(rate);
-                    if (list.Count != 0)
-                    {
-                        StudentListView listView = new StudentListView();
-                        listView.Text = "按成绩段查找";
-                        listView.AddStudent(list);
-                        listView.ShowDialog();
-                    }
-                    else
-                    {
-                        MessageBox.Show("没有找到！");
-                    }
+                    list = rbTree.FindInRate(rate);
+                    listView.Text = "按成绩段查找";
                 }
-                #endregion
-                #region Score
                 else if (radioButtonScore.Checked)
                 {
                     int min = Convert.ToInt32(textBoxScoreL.Text);
@@ -320,21 +285,25 @@ namespace RBTree
                     }
                     else
                     {
-                        List<Student> list = rbTree.FindInScore(min, max);
-                        if (list.Count != 0)
-                        {
-                            StudentListView listView = new StudentListView();
-                            listView.Text = "按分数段查找";
-                            listView.AddStudent(list);
-                            listView.ShowDialog();
-                        }
-                        else
-                        {
-                            MessageBox.Show("没有找到！");
-                        }
+                        list = rbTree.FindInScore(min, max);
+                        listView.Text = "按分数段查找";
                     }
                 }
-                #endregion
+                if (list.Count != 0)
+                {
+                    listView.AddStudent(list);
+                    listView.ShowDialog();
+                    if (listView.Selected != null)
+                    {
+                        textBoxName.Text = listView.Selected.Name;
+                        textBoxID.Text = listView.Selected.ID;
+                        textBoxScore.Text = listView.Selected.Socre.ToString();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("没有找到！");
+                }
             }
             catch (System.Exception ex)
             {
@@ -356,6 +325,12 @@ namespace RBTree
                         listView.Text = "节点明细";
                         listView.AddStudent(list);
                         listView.ShowDialog();
+                        if (listView.Selected != null)
+                        {
+                            textBoxName.Text = listView.Selected.Name;
+                            textBoxID.Text = listView.Selected.ID;
+                            textBoxScore.Text = listView.Selected.Socre.ToString();
+                        }
                     }
                 }
             }
