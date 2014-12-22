@@ -84,6 +84,7 @@ namespace RBTree
                 hashID.Add(s);
                 hashName.Add(s);
                 DoubleBufDraw();
+                MessageBox.Show("添加成功");
             }
             catch (System.Exception ex)
             {
@@ -106,6 +107,7 @@ namespace RBTree
                 hashName.Remove(list[0]);
                 hashID.Remove(list[0]);
                 DoubleBufDraw();
+                MessageBox.Show("删除成功");
             }
             catch (System.Exception ex)
             {
