@@ -117,4 +117,20 @@ HashTable用泛型编写，实现添加，删除以及查找的功能。Hash函�
 \item doc$\backslash$ 文档
 \end{itemize}
 程序版本库：\url{https://github.com/yht1995/RBTree.git}
+
+\section{附：红黑树高度的证明}
+求证：包含n个内部节点的红黑树的高度是 O(log(n))。\par
+定义：
+h(v) = 以节点v为根的子树的高度。
+bh(v) = 从v到子树中任何叶子的黑色节点的数目(如果v是黑色则不计数它)(也叫做黑色高度)。\par
+引理：以节点v为根的子树有至少$2^{bh(v) }− 1$个内部节点。\par
+归纳基础：h(v) = 0时，bh(v) - 0，没有内部节点，$2^0-1=0$，结论成立。\par
+归纳假设：若h(v) = k 的v有 $2^{bh(v)} − 1 $个内部节点，则 h(v') = k+1 的 v'有$2^{bh(v')}− 1 $个内部节点。\par
+因为 v' 有 h(v') > 0 所以它是个内部节点。同样的它有黑色高度要么是 bh(v') 要么是 bh(v')-1 的两个儿子。它的内部节点数为
+\[2^{bh(v') − 1} − 1 + 2^{bh(v') − 1} − 1 + 1 = 2^{bh(v')} − 1\]\par
+结论证明：
+因为在从根到叶子的任何路径上至少有一半的节点是黑色(根据红黑树属性4)，根的黑色高度至少是h(root)/2。通过引理我们得到：
+\[
+n\geq 2^{\frac{h(root)}{2}}-1 \Leftrightarrow log(n+1) \geq \frac{h(root)}{2} \Leftrightarrow h(root)\leq 2log(n+1)
+\]
 \end{document}
