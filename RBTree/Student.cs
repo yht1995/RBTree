@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace RBTree
 {
@@ -74,7 +75,11 @@ namespace RBTree
             {
                 rate = TypeRate.E;
             }
-
+            Regex regex = new Regex(@"^[\dX]+\z");
+            if (!regex.IsMatch(id))
+            {
+                throw(new Exception("ID输入不正确"));
+            }
             this.score = score;
             this.id = id;
             this.name = name;
