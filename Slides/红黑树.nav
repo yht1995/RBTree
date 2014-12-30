@@ -37,15 +37,17 @@
 \headcommand {\beamer@subsectionentry {0}{3}{2}{9}{特色}}\headcommand {\beamer@subsectionpages {9}{8}}
 \headcommand {\slideentry {3}{2}{0}{9/9}{详细设计}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\sectionentry {4}{附：红黑树高度的证明}{10}{附：红黑树高度的证明}{0}}
-\headcommand {\beamer@sectionpages {1}{9}}
-\headcommand {\beamer@subsectionpages {6}{9}}
-\headcommand {\slideentry {4}{0}{1}{10/10}{详细设计}{0}}
+\headcommand {\slideentry {3}{2}{1}{10/10}{详细设计}{0}}
 \headcommand {\beamer@framepages {10}{10}}
+\headcommand {\sectionentry {4}{附：红黑树高度的证明}{11}{附：红黑树高度的证明}{0}}
+\headcommand {\beamer@sectionpages {1}{10}}
+\headcommand {\beamer@subsectionpages {6}{10}}
 \headcommand {\slideentry {4}{0}{2}{11/11}{详细设计}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@partpages {1}{11}}
-\headcommand {\beamer@subsectionpages {6}{11}}
-\headcommand {\beamer@sectionpages {1}{11}}
-\headcommand {\beamer@documentpages {11}}
-\headcommand {\def \inserttotalframenumber {11}}
+\headcommand {\slideentry {4}{0}{3}{12/12}{详细设计}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\beamer@partpages {1}{12}}
+\headcommand {\beamer@subsectionpages {6}{12}}
+\headcommand {\beamer@sectionpages {1}{12}}
+\headcommand {\beamer@documentpages {12}}
+\headcommand {\def \inserttotalframenumber {12}}
